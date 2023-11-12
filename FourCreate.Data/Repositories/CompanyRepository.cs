@@ -20,7 +20,24 @@ public class CompanyRepository : ICompanyRepository
 
     public async Task<List<Company>> GetCompanies(int[] ids)
     {
-        var company = await dbContext.Companies.Where(x=> ids.Contains(x.Id)).ToListAsync();
+        var company = await dbContext.Companies
+            .Include(x => x.Employees)
+            .Where(x => ids.Contains(x.Id))
+            .ToListAsync();
+
         return company;
+    }
+
+    public async Task<Company> Insert(Company company)
+    {
+        var newCompany = dbContext.Companies.Add(company);
+        await dbContext.SaveChangesAsync();
+        return newCompany.Entity;
+    }
+
+    public async Task UpdateBatch(List<Company> companies)
+    {
+        dbContext.Companies.UpdateRange(companies);
+        await dbContext.SaveChangesAsync();
     }
 }

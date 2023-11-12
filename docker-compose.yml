@@ -1,0 +1,26 @@
+version: '3.4'
+
+services:
+  fourcreate.api:
+    image: ${DOCKER_REGISTRY-}fourcreateapi
+    build:
+      context: .
+      dockerfile: FourCreate.API/Dockerfile
+  
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'db'
+      MYSQL_USER: 'four-create-user'
+      MYSQL_PASSWORD: 'password123!'
+      MYSQL_ROOT_PASSWORD: 'password123!'
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - cs-app-db-volume:/var/lib/mysql
+
+volumes:
+  cs-app-db-volume:
