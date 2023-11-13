@@ -3,7 +3,7 @@ using FourCreate.Domain.Abstractions;
 using FourCreate.Domain.CreateEmployeeHandlers;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace FourCreate.Domain;
+namespace FourCreate.Domain.Factories;
 public class CreateEmployeeHandlerFactory : ICreateEmployeeHandlerFactory
 {
     private readonly List<ICreateEmployeeHandler> createEmployeeHandlers;
@@ -41,8 +41,8 @@ public class CreateEmployeeHandlerFactory : ICreateEmployeeHandlerFactory
         {
             return await GetCreateEmployeeHandler(id.Value);
         }
-        else if (!string.IsNullOrEmpty(email)) 
-        { 
+        else if (!string.IsNullOrEmpty(email))
+        {
             return await GetCreateEmployeeHandler(email);
         }
         else

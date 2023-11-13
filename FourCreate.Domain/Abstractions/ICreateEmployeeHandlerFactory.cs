@@ -1,6 +1,4 @@
-﻿using FourCreate.Domain.Abstractions;
-
-namespace FourCreate.Domain;
+﻿namespace FourCreate.Domain.Abstractions;
 public interface ICreateEmployeeHandlerFactory
 {
     Task<ICreateEmployeeHandler> GetCreateEmployeeHandler(string email);

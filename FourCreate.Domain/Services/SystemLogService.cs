@@ -1,6 +1,7 @@
 ﻿using FourCreate.Data.Abstractions;
 using FourCreate.Data.Models;
 using FourCreate.Domain.Interfaces;
+using FourCreate.Domain.Models;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 

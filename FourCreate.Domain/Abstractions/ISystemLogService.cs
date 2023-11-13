@@ -1,4 +1,5 @@
 ﻿using FourCreate.Data.Models;
+using FourCreate.Domain.Models;
 
 namespace FourCreate.Domain.Interfaces;
 public interface ISystemLogService

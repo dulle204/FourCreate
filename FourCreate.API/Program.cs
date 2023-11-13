@@ -1,11 +1,12 @@
 using FourCreate.Data;
 using FourCreate.Data.Abstractions;
 using FourCreate.Data.Repositories;
-using FourCreate.Domain;
 using FourCreate.Domain.Abstractions;
 using FourCreate.Domain.CreateEmployeeHandlers;
+using FourCreate.Domain.Factories;
 using FourCreate.Domain.Interfaces;
 using FourCreate.Domain.Services;
+using FourCreate.Domain.Validations;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
@@ -33,6 +34,8 @@ builder.Services.AddTransient<ICompanyRepository, CompanyRepository>();
 builder.Services.AddTransient<ICreateEmployeeHandlerFactory,  CreateEmployeeHandlerFactory>();
 builder.Services.AddTransient<CreateEmployeeHandler>();
 builder.Services.AddTransient<AddEmployeeToCompanyHandler>();
+
+builder.Services.AddTransient<ICreateEmployeeValidation, CreateEmployeeValidation>();
 
 builder.Services.AddTransient<ISystemLogService, SystemLogService>();
 builder.Services.AddTransient<IEmployeeService, EmployeeService>();
