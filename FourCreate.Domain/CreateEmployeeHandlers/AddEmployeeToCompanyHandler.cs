@@ -1,8 +1,9 @@
 ﻿using FourCreate.Data.Abstractions;
 using FourCreate.Data.Models;
 using FourCreate.Domain.Abstractions;
+using FourCreate.Domain.Models;
 
-namespace FourCreate.Domain.Services;
+namespace FourCreate.Domain.CreateEmployeeHandlers;
 public class AddEmployeeToCompanyHandler : ICreateEmployeeHandler
 {
     private readonly ICompanyRepository companyRepository;
@@ -22,7 +23,7 @@ public class AddEmployeeToCompanyHandler : ICreateEmployeeHandler
     {
         var companies = await companyRepository.GetCompanies(createEmployee.CompanyIds);
         var employee = await employeeRepository.GetEmployee(createEmployee.Email);
-        foreach (var company in companies) 
+        foreach (var company in companies)
         {
             company.Employees.Add(employee);
         }

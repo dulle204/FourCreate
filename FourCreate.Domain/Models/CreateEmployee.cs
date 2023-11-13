@@ -1,4 +1,4 @@
-﻿namespace FourCreate.Domain;
+﻿namespace FourCreate.Domain.Models;
 public class CreateEmployee
 {
     public string Email { get; set; }

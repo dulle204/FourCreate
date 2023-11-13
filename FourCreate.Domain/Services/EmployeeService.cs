@@ -1,6 +1,7 @@
 ﻿using FourCreate.Data.Abstractions;
 using FourCreate.Data.Models;
 using FourCreate.Domain.Abstractions;
+using FourCreate.Domain.Models;
 
 namespace FourCreate.Domain.Services;
 public class EmployeeService : IEmployeeService
@@ -21,17 +22,13 @@ public class EmployeeService : IEmployeeService
 
     public async Task<DomainResult<Employee>> CreateEmployee(CreateEmployee createEmployee)
     {
-        var employee = await employeeRepository.GetEmployee(createEmployee.Email);
-        if (employee is not null)
-        {
-            // handle employee exists
-        }
+        
 
         var companies = await companyRepository.GetCompanies(createEmployee.CompanyIds);
         if (companies is null
             && companies.Count == 0)
         {
-            // companies not exist    
+            return new($"Comapnies does not exist.");
         }
 
         foreach (var company in companies)
@@ -39,37 +36,12 @@ public class EmployeeService : IEmployeeService
             if (company.Employees is not null
                 && company.Employees.Any(x => x.Title.Equals(createEmployee.Title)))
             {
-                // handle title exists
+                return new("Title already exists in company");
             }
         }
-        var createEmployeHandler = handlerFactory.GetCreateEmployeeHandler(employee is not null);
+        var createEmployeHandler = await handlerFactory.GetCreateEmployeeHandler(createEmployee.Email);
         var result = await createEmployeHandler.HandleCreateEmployee(createEmployee);
 
         return result;
     }
-
-    /*private async Task<DomainResult<object>> ValidateAsync(CreateEmployee createEmployee)
-    {
-        var employee = await employeeRepository.GetEmployee(createEmployee.Email);
-        if (employee is not null)
-        {
-            // handle employee exists
-        }
-
-        var companies = await companyRepository.GetCompanies(createEmployee.CompanyIds);
-        if (companies is null
-            && companies.Count == 0)
-        {
-            // companies not exist    
-        }
-
-        foreach (var company in companies)
-        {
-            if (company.Employees is not null
-                && company.Employees.Any(x => x.Title.Equals(createEmployee.Title)))
-            {
-                // handle title exists
-            }
-        }
-    }*/
 }

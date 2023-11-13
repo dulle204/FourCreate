@@ -1,15 +1,10 @@
 ﻿using FourCreate.Data.Abstractions;
 using FourCreate.Data.Models;
-using FourCreate.Data.Repositories;
 using FourCreate.Domain.Abstractions;
 using FourCreate.Domain.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using FourCreate.Domain.Models;
 
-namespace FourCreate.Domain.Services;
+namespace FourCreate.Domain.CreateEmployeeHandlers;
 public class CreateEmployeeHandler : ICreateEmployeeHandler
 {
     private readonly IEmployeeRepository employeeRepository;

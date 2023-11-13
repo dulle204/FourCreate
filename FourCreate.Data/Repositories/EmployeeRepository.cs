@@ -23,6 +23,12 @@ public class EmployeeRepository : IEmployeeRepository
         return employee;
     }
 
+    public async Task<Employee> GetEmployee(int id)
+    {
+        var employee = await dbContext.Employees.SingleOrDefaultAsync(x => x.Id == id);
+        return employee;
+    }
+
     public async Task<Employee> InsertEmployee(Employee employee)
     {
         var newEmployee = dbContext.Employees.Add(employee);

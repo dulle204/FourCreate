@@ -2,6 +2,7 @@
 using FourCreate.Data.Abstractions;
 using FourCreate.Data.Models;
 using FourCreate.Domain.Abstractions;
+using FourCreate.Domain.Models;
 
 namespace FourCreate.Domain.Services;
 public class CompanyService : ICompanyService
@@ -30,23 +31,17 @@ public class CompanyService : ICompanyService
         }
         catch (UniqueConstraintException ex)
         {
-            // handle exception
-            // change to record
-            return new(null)
-            {
-                ErrorMessage = ex.Message,
-                IsSuccess = false
-            };
+            return new(ex.Message);
         }
 
         foreach (var item in createCompany.Employees)
         {
-            var createEmployeeHandler = createEmployeeHandlerFactory.GetCreateEmployeeHandler(item.id.HasValue);
+            var createEmployeeHandler = await createEmployeeHandlerFactory.GetCreateEmployeeHandler(item.id, item.Email);
             await createEmployeeHandler.HandleCreateEmployee(new()
             {
                 CompanyIds = new[] { newCompany.Id },
                 Email = item.Email,
-                Title = (EmployeeTitle)item.Title,
+                Title = (Models.EmployeeTitle)item.Title,
             });
         }
 

@@ -1,5 +1,5 @@
-﻿namespace FourCreate.Domain;
-public class DomainResult<T> where T : class
+﻿namespace FourCreate.Domain.Models;
+public record DomainResult<T> where T : class
 {
     public T Entity { get; set; }
     public bool IsSuccess { get; set; } = true;
@@ -8,5 +8,11 @@ public class DomainResult<T> where T : class
     public DomainResult(T entity)
     {
         Entity = entity;
+    }
+
+    public DomainResult(string errorMessage)
+    {
+        IsSuccess = false;
+        ErrorMessage = errorMessage;
     }
 }

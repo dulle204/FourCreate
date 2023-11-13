@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using FourCreate.API.Models.Requests;
 using FourCreate.Data.Models;
-using FourCreate.Domain;
 using FourCreate.Domain.Abstractions;
+using FourCreate.Domain.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FourCreate.API.Controllers;
