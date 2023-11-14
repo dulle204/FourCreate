@@ -16,7 +16,7 @@ public class CreateEmployeeValidation : ICreateEmployeeValidation
         foreach (var company in companies)
         {
             if (company.Employees is not null
-                && company.Employees.Any(x => x.Title.Equals(createEmployee.Title)))
+                && company.Employees.Any(x => x.Title.Equals((Data.Models.EmployeeTitle)createEmployee.Title)))
             {
                 return new("Title already exists in company");
             }

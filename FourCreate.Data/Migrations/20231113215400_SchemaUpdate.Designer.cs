@@ -2,6 +2,7 @@
 using FourCreate.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -9,9 +10,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FourCreate.Data.Migrations
 {
     [DbContext(typeof(FourCreateDbContext))]
-    partial class FourCreateDbContextModelSnapshot : ModelSnapshot
+    [Migration("20231113215400_SchemaUpdate")]
+    partial class SchemaUpdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
